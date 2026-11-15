@@ -112,6 +112,11 @@ export declare class ChannelManager {
         error?: string;
     }>;
     /**
+     * 记下用户在设置页连上的渠道，重启后由 initAll 自动恢复。扫码类渠道（微信、WhatsApp）
+     * 连接时不带凭据，connect 不会写 store；不记下来的话，每次重启 DSH 都要重新点「连接」。
+     */
+    markEnabled(id: string): void;
+    /**
      * 停用并停止一个渠道（仅运行态，不持久化 enabled——重启后按配置自动恢复）。
      * 彻底移除配置请用 {@link remove}。
      */
