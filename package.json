@@ -1,0 +1,116 @@
+{
+  "name": "dsh-im-gateway",
+  "version": "0.3.4",
+  "description": "DSH IM Gateway: drive DSH agents from WeChat, Feishu, DingTalk, WeCom, QQ, Telegram, Discord, Slack, WhatsApp and 20+ other chat apps, with session routing, remote approvals, questions, reminders and allowlists.",
+  "license": "MIT",
+  "author": "zhuiyueya",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timecatbit/dsh-im-gateway.git"
+  },
+  "homepage": "https://github.com/timecatbit/dsh-im-gateway#readme",
+  "bugs": {
+    "url": "https://github.com/timecatbit/dsh-im-gateway/issues"
+  },
+  "engines": {
+    "dsh": ">=0.2.1-rc.5"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "cordis",
+    "im",
+    "wechat",
+    "feishu",
+    "telegram"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*": "./locale/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src",
+    "client.js",
+    "cordis.patch.yml",
+    "locale",
+    "assets",
+    "docs/qr-login-matrix.md",
+    "README.md",
+    "README.en.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "scripts": {
+    "build": "node -e \"require('node:fs').rmSync('lib',{recursive:true,force:true})\" && tsc -p tsconfig.json && node -e \"require('node:fs').copyFileSync('client.js','lib/client.js')\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "check": "pnpm run typecheck && pnpm run build && pnpm run test"
+  },
+  "dependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/schemastery": "^3.18.1",
+    "qrcode": "^1.5.4"
+  },
+  "optionalDependencies": {
+    "@larksuiteoapi/node-sdk": "^1.73.0",
+    "@tencent-connect/qqbot-connector": "^1.2.0",
+    "@wecom/aibot-node-sdk": "^1.0.7",
+    "@whiskeysockets/baileys": "~6.7.24",
+    "dingtalk-stream": "^2.1.4"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-agent": ">=0.2.1-rc.5",
+    "@deepseek-ai/dsh-agent-preset-registry": ">=0.2.1-rc.5",
+    "@deepseek-ai/dsh-attachment": ">=0.2.1-rc.5",
+    "@deepseek-ai/dsh-host-webserver": ">=0.2.1-rc.5",
+    "@deepseek-ai/dsh-jobs": ">=0.2.1-rc.5",
+    "@deepseek-ai/dsh-llm": ">=0.2.1-rc.5",
+    "@deepseek-ai/dsh-session": ">=0.2.1-rc.5",
+    "@deepseek-ai/dsh-session-query": ">=0.2.1-rc.5",
+    "@deepseek-ai/dsh-tools": ">=0.2.1-rc.5",
+    "@deepseek-ai/dsh-user-approval": ">=0.2.1-rc.5",
+    "@deepseek-ai/dsh-user-questions": ">=0.2.1-rc.5"
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh-agent": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-agent-preset-registry": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-attachment": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-host-webserver": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-jobs": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-llm": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-session": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-session-query": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-tools": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-user-approval": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-user-questions": "0.2.2-rc.3",
+    "@larksuiteoapi/node-sdk": "^1.36.0",
+    "@noble/curves": "^1.6.0",
+    "@types/node": "^22.10.0",
+    "@types/qrcode": "^1.5.6",
+    "typescript": "^5.9.2"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-settings-general"
+      ],
+      "platform": "web"
+    }
+  }
+}
