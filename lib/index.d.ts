@@ -21,7 +21,7 @@ declare module '@deepseek-ai/dsh-jobs' {
     }
 }
 import type { ImGatewayConfig } from './core/types.js';
-export declare const name = "dsh-im-gateway";
+export declare const name = "@timecatbit/dsh-im-gateway";
 export declare const inject: string[];
 /** 网关部署配置。 */
 export declare const Config: Schema<ImGatewayConfig>;
